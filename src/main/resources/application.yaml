@@ -1,0 +1,80 @@
+spring:
+   profiles:
+      active: dev
+   velocity:
+      enabled: false
+   freemarker:
+      cache: false
+      requestContextAttribute: requestContext
+      settings:
+        date_format: yyyy-MM-dd
+        time_format: HH:mm:ss
+        datetime_format: yyyy-MM-dd HH:mm:ss
+        number_format: "#.##"
+        auto_import: /base/env.ftl as env
+   
+db:
+   driverClassName: com.mysql.jdbc.Driver
+   autoCommit: false
+mybatis:
+   #configLocation: classpath:/mybatis-config.xml
+   mapperLocations: classpath*:/com/atme8/activity/domain/dao/mybatis/mapping/*.xml
+---
+spring:
+   profiles: dev
+   redis:
+      database: 0
+      host: 192.168.0.14
+      password: redis
+      port: 6379
+db:
+   username: activity
+   password: activity
+   jdbcUrl: jdbc:mysql://192.168.0.14:3306/activity?useUnicode=true&charaterEncoding=utf8
+casRestServer:
+   ribbon:
+      listOfServers: http://cas.dev.taxhoo.com
+zhaowobaRestSever:
+   ribbon:
+      listOfServers: http://test.dev.taxhoo.com
+server:
+   port: 80
+---
+spring:
+  profiles: test
+  redis:
+     database: 1
+     host: 192.168.0.14
+     password: redis
+     port: 6379
+db:
+   username: actproject
+   password: actproject
+   jdbcUrl: jdbc:mysql://192.168.0.12:3306/actproject?useUnicode=true&charaterEncoding=utf8
+casRestServer:
+   ribbon:
+      listOfServers: http://cas.dev.taxhoo.com
+zhaowobaRestSever:
+   ribbon:
+      listOfServers: http://test.dev.taxhoo.com
+server:
+   port: 80
+---
+spring:
+   profiles: prod
+   redis:
+      host: 127.0.0.1
+      password: redis
+      port: 6379
+db:
+   username: huodong
+   password: Huodong2015
+   jdbcUrl: jdbc:mysql://zhaowoba.mysql.rds.aliyuncs.com:3306/huodong?useUnicode=true&charaterEncoding=utf8
+casRestServer:
+   ribbon:
+      listOfServers: http://passport.atme8.com
+zhaowobaRestSever:
+   ribbon:
+      listOfServers: http://www.atme8.com
+server:
+   port: 80
